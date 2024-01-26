@@ -9,11 +9,17 @@ public class PlayerManager : MonoBehaviour
     //SpriteRenderer spriteRenderer;
     public GameObject panelEndGame;
 
-    //void Start()
-    //{
+    public GameObject effectPartical;
+
+    void Start()
+    {
     //    rigidbody2D = GetComponent<Rigidbody2D>();
     //    spriteRenderer = GetComponent<SpriteRenderer>();
-    //}
+
+        // Instantiate(effectPartical, 
+        //             gameObject.transform);
+
+    }
 
     //float movePrefix = 6;
 
@@ -40,6 +46,26 @@ public class PlayerManager : MonoBehaviour
         {
             Time.timeScale = 0;
             panelEndGame.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "fruits")
+        {
+            
+
+            Transform tempTransform = collider.gameObject.transform;
+            
+            Vector2 pos = tempTransform.position;
+
+            Debug.Log("an diem " + pos);
+
+            Instantiate(effectPartical, pos, Quaternion.identity);
+
+            Destroy(collider.gameObject, 1);
+
+            
         }
     }
 
