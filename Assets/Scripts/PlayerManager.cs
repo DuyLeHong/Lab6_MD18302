@@ -11,13 +11,16 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject effectPartical;
 
+    public GameObject banana;
+
+    public GameObject weapon;
+
     void Start()
     {
-    //    rigidbody2D = GetComponent<Rigidbody2D>();
-    //    spriteRenderer = GetComponent<SpriteRenderer>();
+        //    rigidbody2D = GetComponent<Rigidbody2D>();
+        //    spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Instantiate(effectPartical, 
-        //             gameObject.transform);
+        Instantiate(weapon, gameObject.transform);
 
     }
 
@@ -53,19 +56,17 @@ public class PlayerManager : MonoBehaviour
     {
         if (collider.gameObject.tag == "fruits")
         {
-            
 
-            Transform tempTransform = collider.gameObject.transform;
-            
-            Vector2 pos = tempTransform.position;
 
-            Debug.Log("an diem " + pos);
 
-            Instantiate(effectPartical, pos, Quaternion.identity);
 
-            Destroy(collider.gameObject, 1);
+            Destroy(collider.gameObject);
 
-            
+            //Instantiate(effectPartical, new Vector3 (pos.x, pos.y), tempTransform.localRotation);
+
+
+
+
         }
     }
 
