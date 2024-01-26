@@ -15,12 +15,20 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject weapon;
 
+    public AudioClip jump;
+    public AudioClip collectFruit;
+    private AudioSource audioSource;
+
     void Start()
     {
         //    rigidbody2D = GetComponent<Rigidbody2D>();
         //    spriteRenderer = GetComponent<SpriteRenderer>();
 
         Instantiate(weapon, gameObject.transform);
+
+        audioSource = GetComponent<AudioSource>();
+
+        //Instantiate(effectPartical, gameObject.transform);
 
     }
 
@@ -58,11 +66,11 @@ public class PlayerManager : MonoBehaviour
         {
 
 
-
+            audioSource.PlayOneShot(collectFruit);
 
             Destroy(collider.gameObject);
 
-            //Instantiate(effectPartical, new Vector3 (pos.x, pos.y), tempTransform.localRotation);
+            //Instantiate(effectPartical, new Vector3(0, 0, 0), Quaternion.identity);
 
 
 
