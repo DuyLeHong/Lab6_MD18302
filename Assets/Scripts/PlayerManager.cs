@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    //Rigidbody2D rigidbody2D;
+    Rigidbody2D rigidbody2D;
     //SpriteRenderer spriteRenderer;
     public GameObject panelEndGame;
 
@@ -19,9 +21,12 @@ public class PlayerManager : MonoBehaviour
     public AudioClip collectFruit;
     private AudioSource audioSource;
 
+    public TextMeshProUGUI scoreTxt;
+
+
     void Start()
     {
-        //    rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         //    spriteRenderer = GetComponent<SpriteRenderer>();
 
         Instantiate(weapon, gameObject.transform);
@@ -32,12 +37,12 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    //float movePrefix = 6;
+    float movePrefix = 6;
 
-    //public void Jump()
-    //{
-    //    rigidbody2D.AddForce(Vector2.up * movePrefix, ForceMode2D.Impulse);
-    //}
+    public void Jump()
+    {
+        rigidbody2D.AddForce(Vector2.up * movePrefix, ForceMode2D.Impulse);
+    }
 
     //public void moveLeft ()
     //{
@@ -60,6 +65,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public static int currentScore = 0;
+
+    public static string TXT_SCORE_PREFIX = "Điểm số: ";
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "fruits")
@@ -69,6 +78,10 @@ public class PlayerManager : MonoBehaviour
             audioSource.PlayOneShot(collectFruit);
 
             Destroy(collider.gameObject);
+
+            currentScore += 5;
+
+            scoreTxt.SetText(TXT_SCORE_PREFIX + currentScore.ToString());
 
             //Instantiate(effectPartical, new Vector3(0, 0, 0), Quaternion.identity);
 
@@ -83,4 +96,12 @@ public class PlayerManager : MonoBehaviour
     {
         
     }
+
+    //void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Jump();
+    //    }
+    //}
 }
